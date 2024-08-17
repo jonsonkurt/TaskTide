@@ -1,0 +1,112 @@
+﻿@model TaskTide.Models.TaskSortViewModel
+
+@{
+    ViewData["Title"] = "Ongoing Tasks";
+}
+
+<br />
+
+<div class="green-box-header">
+    <h1>@ViewData["Title"]</h1>
+</div>
+
+
+<br />
+<form asp-controller="OngoingTasks" asp-action="Index" method="get" class="filter-form">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group search-group">
+                <div class="input-group">
+                    <span class="input-group-text"><i class="fas fa-search"></i></span>
+                    <input type="text" id="searchString" name="searchString" asp-for="SearchString" class="form-control" placeholder="Search for a Task...">
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            <div class="form-group">
+                <select id="taskStatus" name="taskStatus" asp-for="TaskStatus" asp-items="Model.Status" class="form-control">
+                    <option value="">All Task Status</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            <div class="form-group">
+                <select id="taskImportance" name="taskImportance" asp-for="TaskImportance" asp-items="Model.Importance" class="form-control">
+                    <option value="">All Task Importance</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-filter"></i>
+            </button>
+        </div>
+    </div>
+</form>
+
+<br />
+
+@if (Model.Tasks.Count() > 0)
+{
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Tasks![0].TaskTitle)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Tasks![0].DueDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Tasks![0].Status)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Tasks![0].Importance)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Tasks!)
+            {
+                <tr>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@item.Id">@Html.DisplayFor(modelItem => item.TaskTitle)</a>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DueDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Importance)
+                    </td>
+                    <td>
+                        <!-- Edit icon -->
+                        <a asp-action="Edit" asp-route-id="@item.Id">
+                            <i class="fas fa-edit"></i>
+                        </a>
+
+                        <!-- Delete icon -->
+                        <a asp-action="Delete" asp-route-id="@item.Id">
+                            <i class="fas fa-trash-alt"></i>
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <div class="empty-view-container">
+        <img src="~/images/empty_view.png" alt="TaskTide Empty View" class="empty-view">
+        <h5>No ongoing tasks found</h5>
+    </div>
+}
+

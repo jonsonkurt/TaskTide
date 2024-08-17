@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] | TaskTide</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/TaskTide.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+</head>
+<body>
+    <header class="header">
+        <div class="row d-flex align-items-center justify-content-between">
+            <div class="col-md-8">
+                <p class="header-left">
+                    <span><i class="fas fa-calendar-alt"></i></span> @DateTime.Now.ToString("dd MMMM yyyy")
+                </p>
+                <div class="header-bottom-left">
+                    <h1>Make Waves with Your Productivity!</h1>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <a href="@Url.Action("Create")" class="btn-like">
+                    <i class="fas fa-plus"></i> Add Task
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <section>
+        <nav>
+            <div class="nav-pic">
+                <img src="~/images/tasktide_logo.png" alt="TaskTide Logo">
+            </div>
+            <a class="nav-link" asp-area="" asp-controller="Dashboard" asp-action="Index">
+                <i class="fas fa-columns"></i> Dashboard
+            </a>
+            <a class="nav-link" asp-area="" asp-controller="OngoingTasks" asp-action="Index">
+                <i class="fas fa-tasks"></i> Ongoing Tasks
+            </a>
+            <a class="nav-link" asp-area="" asp-controller="TaskArchive" asp-action="Index">
+                <i class="fas fa-archive"></i> Task Archive
+            </a>
+        </nav>
+
+        <article>
+            <div class="container">
+                @RenderBody()
+            </div>
+        </article>
+    </section>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

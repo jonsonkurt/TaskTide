@@ -1,0 +1,56 @@
+﻿@{
+    ViewData["Title"] = "Dashboard";
+}
+
+@model TaskTide.Models.DashboardViewModel
+
+<br />
+
+@if (Model.TotalCount > 0)
+{
+    <div class="container">
+        <div class="grid-container">
+            <div class="upcoming-deadlines card grid-item span-two-rows-and-columns">
+                <h2>Upcoming Deadlines</h2>
+                <br />
+                <ul>
+                    @if (Model.DueSoonCount == 0)
+                    {
+                        <h5>No upcoming deadlines in the next three days, yay!</h5>
+                    }
+                    else
+                    {
+                        @foreach (var task in Model.UpcomingTasks)
+                        {
+                            <li><a asp-action="Details" asp-route-id="@task.Id">@task.TaskTitle</a> <br /> Due on: @task.DueDate.ToString("dd MMMM yyyy")</li>
+                        }
+                    }
+
+                </ul>
+            </div>
+            <div class="task-stats card grid-item">
+                <h1>@Model.TotalCount</h1>
+                <p>TASKS CREATED</p>
+            </div>
+            <div class="task-stats card grid-item">
+                <h1>@Model.CompletedCount</h1>
+                <p>TASKS COMPLETED</p>
+            </div>
+            <div class="task-stats card grid-item overdue">
+                <h1>@Model.OverdueCount</h1>
+                <p>TASKS OVERDUE</p>
+            </div>
+            <div class="task-stats card grid-item due-soon">
+                <h1>@Model.DueSoonCount</h1>
+                <p>TASKS DUE SOON</p>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="empty-view-container">
+        <img src="~/images/empty_view.png" alt="TaskTide Empty View" class="empty-view">
+        <h5>No tasks found</h5>
+    </div>
+}

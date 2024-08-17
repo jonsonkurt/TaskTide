@@ -1,0 +1,53 @@
+﻿@{
+    ViewData["Title"] = "Task Archive";
+}
+
+<br />
+
+<div class="green-box-header">
+    <h1>@ViewData["Title"]</h1>
+</div>
+
+@if (Model.Count > 0)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Task Title</th>
+                <th>Due Date</th>
+                <th>Status</th>
+                <th>Importance</th>
+                <th></th>
+                <!-- Add other columns as needed -->
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var task in Model)
+            {
+                <tr>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@task.Id">@task.TaskTitle</a>
+                    </td>
+                    <td>@task.DueDate.ToShortDateString()</td>
+                    <td>@task.Status</td>
+                    <td>@task.Importance</td>
+                    <td>
+                        <!-- Delete icon -->
+                        <a asp-action="Delete" asp-route-id="@task.Id">
+                            <i class="fas fa-trash-alt"></i>
+                        </a>
+                    </td>
+
+                    <!-- Add other columns as needed -->
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <div class="empty-view-container">
+        <img src="~/images/empty_view.png" alt="TaskTide Empty View" class="empty-view">
+        <h5>No completed tasks found</h5>
+    </div>
+}
