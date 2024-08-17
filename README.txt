@@ -3,6 +3,8 @@ Task Management Application
 Overview
 	TaskRide is a web application developed using ASP.NET MVC and C#. It allows users to manage tasks by creating, viewing, editing, and deleting them. The application is divided into three main sections: Dashboard, Ongoing Tasks, and Task Archive.
 
+![image](https://github.com/jonsonkurt/TaskTide/blob/master/Preview/Dashboard.png)
+
 Features
 	Dashboard:
 	-Displays the current date.
