@@ -10,6 +10,7 @@
 - Shows **upcoming tasks** within the next three days.
 
 ![Dashboard](https://github.com/jonsonkurt/TaskTide/blob/master/Preview/Dashboard.png?raw=true)
+![Task Details](https://github.com/jonsonkurt/TaskTide/blob/master/Preview/Task%20Details.png?raw=true)
 
 ### Ongoing Tasks:
 
